@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html>
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
@@ -10,9 +10,8 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="『阅读笔记』 iDice - Problem Identiﬁcation for Emerging Issues">
 <meta property="og:url" content="http://blog.tsinghua2018.top/2020/04/02/idice-intro/index.html">
-<meta property="og:site_name" content="个人小站">
+<meta property="og:site_name" content="David&#39;s Blog">
 <meta property="og:description" content="这篇 paper 由微软团队在 2016 年发表1。在这篇文章中，他们提出了结合了多种剪枝策略的封闭项挖掘算法，主要用于解决异常报告（emerging issues）的根因定位与根因分析等问题。 背景介绍 问题描述和挑战 多维度指标的异常定位是 AIOps 领域的一个典型且有挑战的问题。在互联网服务运维中，当某个总指标（如总流；量）发生异常时，需要快速准确地定位到是哪个交叉维度的细粒度指标（如“省">
-<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_15-40-37.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_18-05-13.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/20200405164216.png">
@@ -71,13 +70,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">首页</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/tags/">标签</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/about/">关于</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/search/">搜索</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </span>
@@ -91,10 +90,10 @@
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
     </span>
     <br/>
     <div id="share" style="display: none">
@@ -133,7 +132,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">个人小站</span>
+        <span itemprop="name">David's Blog</span>
       </span>
       
     <div class="postdate">
@@ -243,7 +242,7 @@ p = \frac{V_{X_t}}{V_t}
 
     <div class="blog-post-comments">
         <div id="disqus_thread">
-            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
         </div>
     </div>
 
@@ -256,13 +255,13 @@ p = \frac{V_{X_t}}{V_t}
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">首页</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/tags/">标签</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/about/">关于</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/search/">搜索</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -289,10 +288,10 @@ p = \frac{V_{X_t}}{V_t}
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
     </div>
 
   </div>
@@ -311,13 +310,13 @@ p = \frac{V_{X_t}}{V_t}
     <nav>
       <ul>
          
-          <li><a href="/">首页</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/tags/">标签</a></li>
+          <li><a href="/tags/">Tags</a></li>
          
-          <li><a href="/about/">关于</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/search/">搜索</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </nav>
@@ -348,7 +347,7 @@ p = \frac{V_{X_t}}{V_t}
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -359,7 +358,7 @@ p = \frac{V_{X_t}}{V_t}
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.trigger.setAttribute('aria-label', "Copied!");
       e.clearSelection();
     })
   })
