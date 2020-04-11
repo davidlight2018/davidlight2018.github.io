@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>time-series-intro</title>
+      <link href="/2020/04/10/time-series-intro/"/>
+      <url>/2020/04/10/time-series-intro/</url>
+      
+        <content type="html"><![CDATA[<h2 id="时间序列">时间序列</h2><h3 id="相关描述">相关描述</h3><h4 id="趋势">趋势</h4><p>当一个时间序列数据长期增长或长期下降时，表示该序列有 <em>趋势</em>。</p><h4 id="季节性">季节性</h4><p>当时间序列中的数据收到季节性因素（一年或一周的时间）的影响时，表示该序列具有 <em>季节性</em>。季节性总是一个已知并且固定的频率。</p><h4 id="周期性">周期性</h4><p>当时间序列数据存在不固定频率的上升和下降时，表示该序列具有 <em>周期性</em>。</p><h3 id="季节性-vs-周期性">季节性 vs 周期性</h3><p>当数据的波动是无规律时，表示序列存在周期性；如果波动的频率不变而且与固定长度的时间段有关，表示序列存在季节性。一般而言，周期的长度较长，并且周期的波动幅度也更大。</p><h3 id="示例">示例</h3><p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-10_17-59-35.png" style="zoom:33%;" /></p><ul><li><p>美国新建房屋销售额（左上）</p><p>表现出强烈的年度季节性，以及周期为 6-10 年的周期性。但是数据并没有表现出明显的趋势。</p></li><li><p>美国国债价格（右上）</p><p>该序列并没有季节性，但是有明显下降的趋势。</p></li><li><p>澳大利亚季度电力产值（左下）</p><p>表现出向上增长的趋势，以及强季节性。但是并不存在周期性。</p></li><li><p>Google收盘股价格（右下）</p><p>该价格波动没有趋势，也没有季节性和周期性。随机波动没有良好的形态特征，不能很好地预测。</p></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>『阅读笔记』 iDice - Problem Identiﬁcation for Emerging Issues</title>
+      <link href="/2020/04/02/idice-intro/"/>
+      <url>/2020/04/02/idice-intro/</url>
+      
+        <content type="html"><![CDATA[<p>这篇 paper 由微软团队在 2016 年发表<sup id="a1"><a href="#f1">1</a></sup>。在这篇文章中，他们提出了结合了多种剪枝策略的封闭项挖掘算法，主要用于解决异常报告（emerging issues）的根因定位与根因分析等问题。</p><h2 id="背景介绍">背景介绍</h2><h3 id="问题描述和挑战">问题描述和挑战</h3><p>多维度指标的异常定位是 AIOps 领域的一个典型且有挑战的问题。在互联网服务运维中，当某个总指标（如总流；量）发生异常时，需要快速准确地定位到是哪个交叉维度的细粒度指标（如“省份=北京 &amp; 运营商=联通”的流量）的异常导致的，以便尽快做进一步的修复止损动作。由于运维中的指标维度多、每个维度的取值范围大，导致异常定位的搜索空间非常大。同时，由于这些属性通常都包括时间戳，因此诸如“挖掘频繁子集”的方法在此场景下就不太适用。</p><h3 id="有效组合">有效组合</h3><p>我们将出现问题的属性组合称为有效组合（effective combinations），因此面临的挑战是从所有可能的组合中自动且精准地识别出有效组合。整个属性组合通过子集-超集的关系形成一种格结构。每个节点表示一个属性组合，每条边表示一个子集-超集关系。</p><p>对于 X 和 Y 的两个属性组合，如果包含 X 的数据也包含在 Y 的数据中，则称 X 为 Y 的子集，Y 为 X 的超集。例如，{A, B, C} 是 {A, B} 和 {A, C} 的子集。</p><p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_15-40-37.png" style="zoom: 50%;" /></p><center style="font-size:16px;color:#808080;text-decoration:underline">图1. 有效组合</center><h3 id="需要达到的要求">需要达到的要求</h3><ol type="1"><li>实时性要求高。当维度较多而且各维度中属性值数目较多时，考验算法的计算效率。</li><li>元素指标之间的关系复杂。例如，当维度为位置，属性值为“北京”的 KPI 发生异常时，一般属性值为“北京移动”、“北京联通”的 KPI 也会发生异常，进而属性值为“移动”、“联通”的 KPI 也会发生异常。</li><li>结果尽可能简洁。用尽可能少的维度及其属性值的组合来表示最为全面的根因。</li></ol><h2 id="idice-算法介绍">iDice 算法介绍</h2><p>iDice 使用三种剪枝策略来减少巨大的搜索空间，分别为 Impact based Pruning、Change Detection based Pruning 和 Isolation Power based Pruning。</p><p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_18-05-13.png" style="zoom:40%;" /></p><center style="font-size:16px;color:#808080;text-decoration:underline">图2. iDice 执行流程</center><h3 id="基于影响程度的剪枝-impact-based-pruning">基于影响程度的剪枝 Impact based Pruning</h3><p>我们仅考虑与大量问题报告相关联的属性集，而将那些问题报告不足的属性集剪掉。</p><p>用户可以通过自定义支持阈值（support threshold）<sup id="a2"><a href="#f2">2</a></sup> 来决定保留哪些属性集合。</p><p>iDice 使用基于 BFS 的封闭项集挖掘算法，在这种情况会忽略问题报告的时间戳信息。</p><p>假设我们有两组属性组合：</p><p>X = {Country=India; TenantType=Edu; DataCenter=DC6}<br />Y = {Country=USA; TenantType=Edu; DataCenter=DC1}</p><p>如果 Y 的问题发生次数低于支持阈值，而 X 的发生次数高于支持阈值，那么 Y 及其所有子集都会被剪枝，而 X 则会保留。</p><h3 id="基于变化检测的剪枝-change-detection-based-pruning">基于变化检测的剪枝 Change Detection based Pruning</h3><p>除了影响程度之外，我们寻找的属性组合还应该与新出现的问题相关。换句话说，我们需要找出与问题报告数量（即突发次数）显著增加相对应的属性组合。</p><p>在获得基于影响程度进行剪枝的封闭项集后，我们考虑时间戳的信息并为每个封闭项集构建对应的时间序列数据，其中每个数据点都表示问题报告的数量。这时我们需要使用变化检测算法来检测时间序列中的变化点（即发生突发事件的点）。</p><p>iDice 采用 GLR（Generalized Likelihood Ratio）<sup id="a3"><a href="#f3">3</a></sup> 作为变化检测算法。变化检测可以表述为假设检验问题。假设时间序列的值拟合分布 <span class="math inline">\(\theta_0\)</span>，而变化区域内的值符合另一个分布 <span class="math inline">\(\theta_1\)</span>。即假设 <span class="math inline">\(H_0\)</span> 对应“无变化”，假设 <span class="math inline">\(H_1\)</span> 对应“变化”。</p><p>GLR 将保持一个阈值。给定几个连续的数据点，如果它们的对数似然比之和大于阈值，则将这些连续的数据点视为变化区域，而连续数据点的第一个点被视为变化点。例如下图，从 Dec-8 到 Dec-10 的点构成变化区域，并且 Dec-8 是改变点。而对于没有任何改变点的时间序列数据，将删除相应的属性组合。</p><p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/20200405164216.png" style="zoom:50%;" /></p><center style="font-size:16px;color:#808080;text-decoration:underline">图3. 问题报告变化示例</center><p>假设我们有两组属性组合：</p><p>X = {Country=India; TenantType=Edu; DataCenter=DC6}<br />Y = {Country=UK; TenantType=Home; DataCenter=DC1}</p><p>它们对应的时间序列分别为 <span class="math inline">\(S_X\)</span> 和 <span class="math inline">\(S_Y\)</span>。如果我们发现 <span class="math inline">\(S_X\)</span> 的出现在 Dec-8（i.e. 变化点）有一个明显的变化（e.g., 从 100 上升到 300），而 <span class="math inline">\(S_Y\)</span> 并无明显的变化，则 Y 属性组合会被剪枝，而 <span class="math inline">\(S_X\)</span> 的变化点会被用在接下来的剪枝策略中。</p><h3 id="基于隔离能力的剪枝-isolation-power-based-pruning">基于隔离能力的剪枝 Isolation Power based Pruning</h3><p>有效组合应该能够将表现出变化的属性组合与其他没有变化的组合分开，为此提出了基于隔离能力的剪枝。</p><p>隔离能力基于信息熵。另 <span class="math inline">\(S_X\)</span> 为属性组合 <span class="math inline">\(X\)</span> 对应的时间序列数据，<span class="math inline">\(X_a\)</span> 表示在 <span class="math inline">\(X\)</span> 的变化区域内，对应的时间序列 <span class="math inline">\(S_X\)</span> 的量的大小，而 <span class="math inline">\(X_b\)</span> 表示在 <span class="math inline">\(X\)</span> 的变化点之前对应的 <span class="math inline">\(S_X\)</span> 的量。<span class="math inline">\(\Omega_a\)</span> 表示 <span class="math inline">\(X\)</span> 变化区域内的整个体积，<span class="math inline">\(\Omega_b\)</span> 则表示 <span class="math inline">\(X\)</span> 的变化点之前的整个体积。<span class="math inline">\(\bar{*}\)</span> 表示相应时间序列的平均值。 <span class="math display">\[\begin{aligned}I P(X) &amp;=-\frac{1}{\overline{\Omega_{a}}+\overline{\Omega_{b}}}\left(\overline{X_{a}} \ln \frac{1}{P(a | X)}+\overline{X_{b}} \ln \frac{1}{P(b | X)}\right.\\&amp;\left.+(\overline{\Omega_{a}}-\overline{X_{a}}) \ln \frac{1}{P(a | \overline{X})}+(\overline{\Omega_{b}}-\overline{X_{b}}) \ln \frac{1}{P(b | \overline{X})}\right)\end{aligned}\]</span> 如图1所示，整个属性组合形成一个网格，网格中的每个节点都可以将数据集分为两部分：包含该属性的问题报告和不包含该属性的报告。如果属性组合是有效组合，则其所有子集节点在相同的变化区域内都应该显示出显著的增加，而其同级节点则不会。因此，一个有效的组合是可以将整个数据集精确地分为两部分的节点：是否有显著的增加。根据信息论，两个数据集（A 和 B）的总熵，在每个数据集（A 或 B）包含相同属性的样本（例如，所有样本都表现出增加，或者都表现出不增加）的情况下，会远小于样本具有不同属性的情况。 <span class="math display">\[\begin{aligned}&amp;P(a | X)=\frac{\overline{X_{a}}}{\overline{X_{b}}+\overline{\underline{X}_{a}}}, P(b | X)=\frac{\overline{X_{b}}}{\overline{X_{b}}+\overline{X_{a}}}\\&amp;P(a | \bar{X})=\frac{\overline{\Omega_{a}}-\overline{X_{a}}}{\overline{\Omega_{a}}+\overline{\Omega_{b}}-\overline{X_{b}}-\overline{X_{a}}}\\&amp;P(b | \bar{X})=\frac{\overline{\Omega_{b}}-\overline{X_{b}}}{\overline{\Omega_{a}}+\overline{\Omega_{b}}-\overline{X_{b}}-\overline{X_{a}}}\end{aligned}\]</span> 在搜索过程中，如果当前集合具有比它的直接超集和子集更高的隔离能力，则我们称当前集合是有效属性组合。在这种情况下，其所有子集将不会被搜索，从而减少搜索空间。</p><p>考虑具有三个属性组合的简单示例：</p><p>X = {Country=India; TenantType=Edu; DataCenter=DC6}<br />Y = {Country=USA; TenantType=Edu; DataCenter=DC1}</p><p>如果 Y 的发生率较低（即低于支持阈值），而 X 的发生率较高（高于支持阈值），则 Y 的所有子集将被修剪掉，而 X 将会保留。</p><h3 id="结果排名">结果排名</h3><p>根据上述剪枝的结果，我们可以获得一组有效的组合。我们根据有效组合的相对重要性对其进行排序。具体使用与 Fisher distance<sup id="a3"><a href="#f3">3</a></sup> 相似的算法进行排名。 <span class="math display">\[R = p_a \times ln \frac{p_a}{p_b}\]</span> 其中 p 由下面公式进行计算，<span class="math inline">\(V_{X_t}\)</span> 表示当前有效组合在时间段 t 的体积，<span class="math inline">\(V_t\)</span> 则表示在时间段 t 内的总体积。<span class="math inline">\(p_a\)</span> 表示在变化的时间段区间的比率，<span class="math inline">\(p_b\)</span> 则表示在检测到变化点之前的时间区间的比率。 <span class="math display">\[p = \frac{V_{X_t}}{V_t}\]</span> 从公式中可以看出，分数 R 考虑了组合的整体影响。如果两个组合具有相同的变化率（即意味着它们具有相同的趋势显著性），我们将把具有体积较大的组合排名更高。R 得分非常低的组合意义不大，可以删除。在具体的实现中，R 分数低于 cutoff 阈值将被剪掉（根据经验值设为 1.0）。最后对剩下的属性组合进行排名，并输出为有效组合。</p><h3 id="整体算法">整体算法</h3><p>算法 1 展示了上述识别有效组合的伪代码。该算法将问题报告数据（多维、时间序列数据）作为输入，并搜索与新出现的问题相关的有效组合。第 1 行的预处理包括数据清理，从而过滤出数据集中明显的噪声属性（例如所有的空值）。</p><p>对于基于 BFS 的封闭项目集挖掘过程返回的每个封闭项目集 <span class="math inline">\(p_i\)</span>，iDice 会依次执行基于影响程度的剪枝（第 6-10 行）、基于变化检测的剪枝（第 11-14 行）、基于隔离能力的剪枝（第 15-19 行）。这些步骤可以简化属性组合并减少搜索空间，从而有可能从大量属性组合中识别有效组合。第 21-26 行表示 iDice 的排名结果。</p><p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-08_15-27-36.png" style="zoom:40%;" /></p><h3 id="评测">评测</h3><p>评测结果就不在这里赘述了，毕竟每种数据集的各种参数都不相同，有兴趣的去看看原文。</p><h2 id="reference">Reference</h2><p><b id="f1">[1]: </b> Lin, Qingwei, et al. iDice: problem identification for emerging issues. <em>Proceedings of the 38th International Conference on Software Engineering</em>. 2016. <a href="#a1">↩︎</a></p><p><b id="f2">[2]: </b> J. Han and M. Kamber. Data Mining: Concepts and Techniques. Morgan kaufmann, 2006. <a href="#a2">↩︎</a></p><p><b id="f3">[3]: </b> M. Basseville, I. V. Nikiforov, et al. Detection of abrupt changes: theory and application, volume 104. Prentice Hall Englewood Cliﬀs, 1993. <a href="#a3">↩︎</a></p><hr />]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> AIOps </tag>
+            
+            <tag> 根因分析 </tag>
+            
+            <tag> 异常检测 </tag>
+            
+            <tag> 论文阅读 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
