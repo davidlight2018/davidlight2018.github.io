@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="期望值 在概率论和统计学中，一个离散性随机变量的期望值，是试验中每次可能的结果乘以其概率结果的总和。而在实际的应用或案例中，我们通常遇到的情况都是离散的。因此这里只简单介绍一下此种情况的期望值如何计算。 定义 若 \(X\) 是离散的随机变量，输出值为 \(x_1, x_2, \cdots\)，与输出值相应的概率为 \(p_1, p_2, \cdots\)（概率和为1），则 \(X\) 的期望值如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="协方差和相关系数">
+<meta property="og:url" content="http://blog.tsinghua2018.top/2020/04/11/statistic-intro/index.html">
+<meta property="og:site_name" content="David&#39;s Blog">
+<meta property="og:description" content="期望值 在概率论和统计学中，一个离散性随机变量的期望值，是试验中每次可能的结果乘以其概率结果的总和。而在实际的应用或案例中，我们通常遇到的情况都是离散的。因此这里只简单介绍一下此种情况的期望值如何计算。 定义 若 \(X\) 是离散的随机变量，输出值为 \(x_1, x_2, \cdots\)，与输出值相应的概率为 \(p_1, p_2, \cdots\)（概率和为1），则 \(X\) 的期望值如">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-12_20-40-17.png">
+<meta property="article:published_time" content="2020-04-11T13:47:34.000Z">
+<meta property="article:modified_time" content="2020-04-15T05:20:58.434Z">
+<meta property="article:author" content="David">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="期望值">
+<meta property="article:tag" content="协方差">
+<meta property="article:tag" content="方差">
+<meta property="article:tag" content="相关系数">
+<meta property="article:tag" content="自相关系数">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-12_20-40-17.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>协方差和相关系数</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/04/12/time-series-intro/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/04/02/idice-intro/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&text=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&is_video=false&description=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=协方差和相关系数&body=Check out this article: http://blog.tsinghua2018.top/2020/04/11/statistic-intro/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&name=协方差和相关系数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&t=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#期望值"><span class="toc-number">1.</span> <span class="toc-text">期望值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">1.2.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协方差"><span class="toc-number">2.</span> <span class="toc-text">协方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方差"><span class="toc-number">3.</span> <span class="toc-text">方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-2"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准差"><span class="toc-number">3.2.</span> <span class="toc-text">标准差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关系数"><span class="toc-number">4.</span> <span class="toc-text">相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-3"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自相关系数"><span class="toc-number">5.</span> <span class="toc-text">自相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-4"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        协方差和相关系数
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">David's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-04-11T13:47:34.000Z" itemprop="datePublished">2020-04-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/" rel="tag">协方差</a>, <a class="tag-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a>, <a class="tag-link" href="/tags/%E6%96%B9%E5%B7%AE/" rel="tag">方差</a>, <a class="tag-link" href="/tags/%E6%9C%9F%E6%9C%9B%E5%80%BC/" rel="tag">期望值</a>, <a class="tag-link" href="/tags/%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0/" rel="tag">相关系数</a>, <a class="tag-link" href="/tags/%E8%87%AA%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0/" rel="tag">自相关系数</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="期望值">期望值</h2>
+<p>在概率论和统计学中，一个离散性随机变量的期望值，是试验中每次可能的结果乘以其概率结果的总和。而在实际的应用或案例中，我们通常遇到的情况都是离散的。因此这里只简单介绍一下此种情况的期望值如何计算。</p>
+<h3 id="定义">定义</h3>
+<p>若 <span class="math inline">\(X\)</span> 是离散的随机变量，输出值为 <span class="math inline">\(x_1, x_2, \cdots\)</span>，与输出值相应的概率为 <span class="math inline">\(p_1, p_2, \cdots\)</span>（概率和为1），则 <span class="math inline">\(X\)</span> 的期望值如下： <span class="math display">\[
+E(X) = \sum_i{p_ix_i}
+\]</span> 当样本发生概率都相同时（平均分布），期望值又等于均值 <span class="math inline">\(E(X) = \bar{x}\)</span>。</p>
+<h3 id="性质">性质</h3>
+<ul>
+<li><p>期望值是线性函数</p>
+<p><span class="math inline">\(E(aX+bY)=aE(X)+bE(Y)\)</span></p></li>
+<li><p>当随机变量 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 的协方差为 0 时（又称它们不相关），下面等式成立。（特别地，当 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 独立时，协方差也为 0）</p>
+<p><span class="math inline">\(E(XY)=E(X) \cdot E(Y)\)</span></p></li>
+</ul>
+<h2 id="协方差">协方差</h2>
+<p>协方差（Covariance）在概率论和统计学中用于衡量两个变量的总体误差。通俗来说，就是两个变量在变化过程中的变化趋势，是同方向变化还是反方向变化？同向或反向程度如何？</p>
+<p>若两个变量是同向变化的，这时协方差就是正的；若两个变量反向变化，这时协方差就是负的。协方差数值越大，表示两个变量的同向程度也越大。</p>
+<h3 id="定义-1">定义</h3>
+<p>若随机变量 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 的期望值分别是 <span class="math inline">\(E(X)=\mu, E(Y)=\nu\)</span>，则 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 之间的协方差为： <span class="math display">\[
+Cov(X, Y) = E[(X-\mu)(Y-\nu)] = E(XY) - \mu\nu
+\]</span> 该公式简单来说就是，两个变量 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 的协方差为，「每个时刻的 <span class="math inline">\(X\)</span> 与其期望之差」乘以「对应时刻的 <span class="math inline">\(Y\)</span> 与其期望之差」，最后再对得到的乘积求和并计算其期望值。</p>
+<p>若 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 是统计独立的，那么二者的协方差为 0，这是因为 <span class="math display">\[
+E(XY) = E(X) \cdot E(Y) = \mu\nu
+\]</span> 但是反过来并不成立，即若 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 的协方差为 0，二者并不一定是统计独立的，但是二者之间一定是不相关的。</p>
+<p>另外，对于 N 个相等概率值的平均分布， <span class="math display">\[
+Cov(X, Y) = \frac{1}{N} \sum_i^N (x_i-\bar{x})(y_i-\bar{y})
+\]</span></p>
+<h2 id="方差">方差</h2>
+<p>方差（Variance）是协方差的特殊情况，即两个变量是相同的。在概率论和统计学中，一个随机变量的方差描述的是它的离散程度，也就是该变量与其期望值的距离。方差越大，代表大部分数值与其期望之间的差异较大。</p>
+<h3 id="定义-2">定义</h3>
+<p>若随机变量 <span class="math inline">\(X\)</span> 的期望值 <span class="math inline">\(E(X)=\mu\)</span>，则 <span class="math inline">\(X\)</span> 的方差为： <span class="math display">\[
+\begin{aligned}
+Var(X) &amp;= E[(X-\mu)^2] = Cov(X, X)
+\end{aligned}
+\]</span> 将上式展开可得： <span class="math display">\[
+Var(X) = E[X^2-2X \cdot E(X)+[E(X)]^2]=E(X^2)-2E(X) \cdot E(X) + [E(X)]^2 = E(X^2)-[E(X)]^2
+\]</span> 即 <span class="math inline">\(X\)</span> 的方差为「其平方的期望」减去「其期望的平方」。</p>
+<p>若 <span class="math inline">\(X\)</span> 是离散的随机变量，输出值为 <span class="math inline">\(x_1, x_2, \cdots\)</span>，与输出值相应的概率为 <span class="math inline">\(p_1, p_2, \cdots\)</span>（概率和为1），则 <span class="math inline">\(X\)</span> 的方差如下： <span class="math display">\[
+\begin{aligned}
+E(X) &amp;= \sum_i{p_ix_i} = \mu\\
+Var(X) &amp;= \sum_i p_i \cdot (x_i-\mu)^2 = \sum_i(p_i \cdot {x_i}^2) - \mu^2
+\end{aligned}
+\]</span> 而对于 N 个相等概率值的平均分布， <span class="math display">\[
+Var(X) = \sigma^2 = \frac{1}{N} \sum_i^N(x_i-\bar{x})^2 = \frac{1}{N}\sum_i^N{x_i}^2 - {\bar{x}}^2
+\]</span></p>
+<h3 id="标准差">标准差</h3>
+<p>我们通常用 <span class="math inline">\(\sigma^2\)</span> 来表示方差，而 <span class="math inline">\(\sigma\)</span> 则表示标准差（Standard Deviation）。</p>
+<p>标准差与方差一样用来表示组内数据间的离散程度，但是相比于方差，标准差用来表示离散程度的数字与样本数据点的数量级和单位一致，更容易理解和后续的分析计算。</p>
+<p>另外，在样本数据大致符合正态分布的情况下，标准差具有方便估算的特性：68.3% 的数据点落在平均值前后 1 个标准差的范围内；95.4% 的数据点落在平均值前后 2 个标准差的范围内；而 99.7% 的数据点将会落在平均值前后 3 个标准差的范围内。因此可以使用 <span class="math inline">\(3\sigma\)</span> 定律排除掉异常的数据点。</p>
+<h2 id="相关系数">相关系数</h2>
+<h3 id="定义-3">定义</h3>
+<p>两个变量之间的皮尔逊相关系数（Pearson Correlation Coeffocient）定义为两个变量之间的协方差和标准差的商，用于度量变量 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 之间的线性相关关系，取值范围为 [-1, 1]，其中正数表示正线性相关，负数表示负线性相关，而 0 表示非线性相关。 <span class="math display">\[
+\rho_{X, Y} = \frac{Cov(X, Y)}{\sigma_X \sigma_Y}
+\]</span> 因此，相关系数也可以看作成一种协方差：一种剔除了两个变量的量纲影响、标准化后的特殊协方差。它消除了两个变量间变化幅度的影响，更能反应出两个变量每单位变化时的相似程度。</p>
+<p>而对于样本的相关系数，常用 <span class="math inline">\(r\)</span> 来表示： <span class="math display">\[
+r = \frac{\sum_{i=1}^N (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^N(x_i-\bar{x})^2}\sqrt{\sum_{i=1}^N(y_i-\bar{y})^2}}
+\]</span> 下图是几组 (x, y) 的点集，以及各个点集中 x 和 y 之间的相关系数。我们可以发现相关系数反映的是变量之间的线性关系和相关性的方向（第一排），而不是相关性的斜率（中间），也不是各种非线性关系（第三排）。请注意：中间的图中斜率为 0，但相关系数是没有意义的，因为此时变量 Y 是 0。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-12_20-40-17.png" style="zoom:20%;" /></p>
+<center style="font-size:16px;color:#808080;text-decoration:underline">
+图1. 来自维基百科
+</center>
+<h2 id="自相关系数">自相关系数</h2>
+<p>正如相关系数可以衡量两个变量之间的线性相关关系一样，自相关系数（Autocorrelation）可以测量时间序列 <strong>滞后值</strong> 之间的线性关系。</p>
+<h3 id="定义-4">定义</h3>
+<p>我们用 <span class="math inline">\(r_k\)</span> 来表示自相关系数，例如 <span class="math inline">\(r_1\)</span> 衡量的是 <span class="math inline">\(y_t\)</span> 和 <span class="math inline">\(y_{t-1}\)</span> 之间的关系， <span class="math inline">\(r_2\)</span> 衡量的是 <span class="math inline">\(y_t\)</span> 和 <span class="math inline">\(y_{t-2}\)</span> 之间的关系。其中 <span class="math inline">\(T\)</span> 是时间序列的长度 <span class="math display">\[
+r_k = \frac{\sum_{t=k+1}^T (y_t-\bar{y})(y_{t-k}-\bar{y})}{\sqrt{\sum_{t=1}^T(y_t-\bar{y})^2}}
+\]</span></p>
+<p>自相关系数值越高，代表这两个时间点具有更高的线性相关性。</p>
+<hr />
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#期望值"><span class="toc-number">1.</span> <span class="toc-text">期望值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">1.2.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协方差"><span class="toc-number">2.</span> <span class="toc-text">协方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方差"><span class="toc-number">3.</span> <span class="toc-text">方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-2"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准差"><span class="toc-number">3.2.</span> <span class="toc-text">标准差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关系数"><span class="toc-number">4.</span> <span class="toc-text">相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-3"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自相关系数"><span class="toc-number">5.</span> <span class="toc-text">自相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-4"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&text=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&is_video=false&description=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=协方差和相关系数&body=Check out this article: http://blog.tsinghua2018.top/2020/04/11/statistic-intro/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&name=协方差和相关系数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&t=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    David
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/tags/">Tags</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'davids-blog-6';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+    
+    
+
+        
+
+        
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" crossorigin="anonymous">
+            <script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js" crossorigin="anonymous"></script>
+            <script
+                    defer
+                    src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"
+                    crossorigin="anonymous"
+                    onload="renderMathInElement(document.body)">
+            </script>
+        
+
+    
+
+</body>
+</html>
