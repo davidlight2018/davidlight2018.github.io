@@ -8,20 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="期望值 在概率论和统计学中，一个离散性随机变量的期望值，是试验中每次可能的结果乘以其概率结果的总和。而在实际的应用或案例中，我们通常遇到的情况都是离散的。因此这里只简单介绍一下此种情况的期望值如何计算。 定义 若 \(X\) 是离散的随机变量，输出值为 \(x_1, x_2, \cdots\)，与输出值相应的概率为 \(p_1, p_2, \cdots\)（概率和为1），则 \(X\) 的期望值如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="协方差和相关系数">
-<meta property="og:url" content="http://blog.tsinghua2018.top/2020/04/11/statistic-intro/index.html">
+<meta property="og:title" content="协方差 and 相关系数">
+<meta property="og:url" content="http://blog.tsinghua2018.top/2020/04/11/statistic_intro/index.html">
 <meta property="og:site_name" content="David&#39;s Blog">
 <meta property="og:description" content="期望值 在概率论和统计学中，一个离散性随机变量的期望值，是试验中每次可能的结果乘以其概率结果的总和。而在实际的应用或案例中，我们通常遇到的情况都是离散的。因此这里只简单介绍一下此种情况的期望值如何计算。 定义 若 \(X\) 是离散的随机变量，输出值为 \(x_1, x_2, \cdots\)，与输出值相应的概率为 \(p_1, p_2, \cdots\)（概率和为1），则 \(X\) 的期望值如">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-12_20-40-17.png">
+<meta property="og:image" content="https://otexts.com/fppcn/fpp_files/figure-html/aelec-1.png">
+<meta property="og:image" content="https://otexts.com/fppcn/fpp_files/figure-html/acfelec-1.png">
+<meta property="og:image" content="https://otexts.com/fppcn/fpp_files/figure-html/wnoise-1.png">
+<meta property="og:image" content="https://otexts.com/fppcn/fpp_files/figure-html/wnoiseacf-1.png">
 <meta property="article:published_time" content="2020-04-11T13:47:34.000Z">
-<meta property="article:modified_time" content="2020-04-15T05:20:58.434Z">
+<meta property="article:modified_time" content="2020-04-19T03:58:45.198Z">
 <meta property="article:author" content="David">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="期望值">
+<meta property="article:tag" content="统计">
 <meta property="article:tag" content="协方差">
 <meta property="article:tag" content="方差">
 <meta property="article:tag" content="相关系数">
-<meta property="article:tag" content="自相关系数">
+<meta property="article:tag" content="白噪声">
+<meta property="article:tag" content="相关图">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-12_20-40-17.png">
     
@@ -43,7 +47,7 @@
         
     
     <!-- title -->
-    <title>协方差和相关系数</title>
+    <title>协方差 and 相关系数</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -83,10 +87,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2020/04/12/time-series-intro/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2020/04/20/kdd2019-microsoft-reading-report/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2020/04/02/idice-intro/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2020/04/02/idice_reading_report/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -99,22 +103,22 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&text=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&is_video=false&description=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=协方差和相关系数&body=Check out this article: http://blog.tsinghua2018.top/2020/04/11/statistic-intro/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&name=协方差和相关系数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&t=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&text=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&is_video=false&description=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=协方差 and 相关系数&body=Check out this article: http://blog.tsinghua2018.top/2020/04/11/statistic_intro/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&name=协方差 and 相关系数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&t=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#期望值"><span class="toc-number">1.</span> <span class="toc-text">期望值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">1.2.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协方差"><span class="toc-number">2.</span> <span class="toc-text">协方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方差"><span class="toc-number">3.</span> <span class="toc-text">方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-2"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准差"><span class="toc-number">3.2.</span> <span class="toc-text">标准差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关系数"><span class="toc-number">4.</span> <span class="toc-text">相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-3"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自相关系数"><span class="toc-number">5.</span> <span class="toc-text">自相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-4"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#期望值"><span class="toc-number">1.</span> <span class="toc-text">期望值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">1.2.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协方差"><span class="toc-number">2.</span> <span class="toc-text">协方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方差"><span class="toc-number">3.</span> <span class="toc-text">方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-2"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准差"><span class="toc-number">3.2.</span> <span class="toc-text">标准差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关系数"><span class="toc-number">4.</span> <span class="toc-text">相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-3"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自相关系数"><span class="toc-number">5.</span> <span class="toc-text">自相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-4"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自相关图"><span class="toc-number">5.2.</span> <span class="toc-text">自相关图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#白噪声"><span class="toc-number">6.</span> <span class="toc-text">白噪声</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -126,7 +130,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        协方差和相关系数
+        协方差 and 相关系数
     </h1>
 
 
@@ -149,7 +153,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/" rel="tag">协方差</a>, <a class="tag-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a>, <a class="tag-link" href="/tags/%E6%96%B9%E5%B7%AE/" rel="tag">方差</a>, <a class="tag-link" href="/tags/%E6%9C%9F%E6%9C%9B%E5%80%BC/" rel="tag">期望值</a>, <a class="tag-link" href="/tags/%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0/" rel="tag">相关系数</a>, <a class="tag-link" href="/tags/%E8%87%AA%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0/" rel="tag">自相关系数</a>
+        <a class="tag-link" href="/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/" rel="tag">协方差</a>, <a class="tag-link" href="/tags/%E6%96%B9%E5%B7%AE/" rel="tag">方差</a>, <a class="tag-link" href="/tags/%E7%99%BD%E5%99%AA%E5%A3%B0/" rel="tag">白噪声</a>, <a class="tag-link" href="/tags/%E7%9B%B8%E5%85%B3%E5%9B%BE/" rel="tag">相关图</a>, <a class="tag-link" href="/tags/%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0/" rel="tag">相关系数</a>, <a class="tag-link" href="/tags/%E7%BB%9F%E8%AE%A1/" rel="tag">统计</a>
     </div>
 
 
@@ -225,6 +229,19 @@ r = \frac{\sum_{i=1}^N (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^N(x_i-\bar{x
 r_k = \frac{\sum_{t=k+1}^T (y_t-\bar{y})(y_{t-k}-\bar{y})}{\sqrt{\sum_{t=1}^T(y_t-\bar{y})^2}}
 \]</span></p>
 <p>自相关系数值越高，代表这两个时间点具有更高的线性相关性。</p>
+<h3 id="自相关图">自相关图</h3>
+<p>通过将自相关系数 <span class="math inline">\(r_k\)</span> 绘制成图，即可得到自相关函数（Autocorrelation），也称作相关图（ACF）。</p>
+<p><img src="https://otexts.com/fppcn/fpp_files/figure-html/aelec-1.png" style="zoom:80%;"   ></p>
+<p>上图表示 1980-1995 年间澳大利亚月度用电量，可以看出该图具有向上的趋势，以及明显的季节性。下图则是其对应的 ACF 图。</p>
+<p><img src="https://otexts.com/fppcn/fpp_files/figure-html/acfelec-1.png" style="zoom:80%;" ></p>
+<p>当数据具有趋势性时，短期滞后的自相关值较大，因为观测点附近的值波动不会很大（也就是说，离观测点近的数据点会和观测点的数值相近）。这时候的时间序列的 ACF 一般是正值，随着滞后阶数的增加而缓慢下降。</p>
+<p>当数据具有季节性时，自相关值在滞后阶数与季节周期相同（或其倍数）时较大。可以看到图中，每年会有一个高峰和低估，因此在滞后阶数为 12 的倍数时，其自相关值会呈现「圆齿状」。</p>
+<h2 id="白噪声">白噪声</h2>
+<p>白噪声是一个对所有时间，其自相关系数为零的随机过程。</p>
+<p><img src="https://otexts.com/fppcn/fpp_files/figure-html/wnoise-1.png" style="zoom: 80%;" ></p>
+<p><img src="https://otexts.com/fppcn/fpp_files/figure-html/wnoiseacf-1.png" style="zoom:80%;" ></p>
+<p>对于白噪声而言，我们期望它的自相关值接近零。但是由于随机扰动的存在，自相关值并不会精确地等于零。对于一个长度为 <span class="math inline">\(T\)</span> 的白噪声序列而言，我们期望在 0.95 的置信度下，它的自相关值处于 <span class="math inline">\(\frac{2}{\sqrt{T}}\)</span> 之间。我们可以很容易的画出 ACF 的边界值（图中蓝色虚线）。如果一个序列中有较多自相关值处于边界之外，那么该序列很可能不是白噪声序列。</p>
+<p>在上例中，序列长度 <span class="math inline">\(T=50\)</span>，因此边界为 <span class="math inline">\(\frac{2}{\sqrt{50}}=0.28\)</span>。该序列所有的自相关值都落在边界之内，因此该序列为白噪声。</p>
 <hr />
 
   </div>
@@ -257,22 +274,22 @@ r_k = \frac{\sum_{t=k+1}^T (y_t-\bar{y})(y_{t-k}-\bar{y})}{\sqrt{\sum_{t=1}^T(y_
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#期望值"><span class="toc-number">1.</span> <span class="toc-text">期望值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">1.2.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协方差"><span class="toc-number">2.</span> <span class="toc-text">协方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方差"><span class="toc-number">3.</span> <span class="toc-text">方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-2"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准差"><span class="toc-number">3.2.</span> <span class="toc-text">标准差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关系数"><span class="toc-number">4.</span> <span class="toc-text">相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-3"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自相关系数"><span class="toc-number">5.</span> <span class="toc-text">自相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-4"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#期望值"><span class="toc-number">1.</span> <span class="toc-text">期望值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">1.2.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#协方差"><span class="toc-number">2.</span> <span class="toc-text">协方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方差"><span class="toc-number">3.</span> <span class="toc-text">方差</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-2"><span class="toc-number">3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标准差"><span class="toc-number">3.2.</span> <span class="toc-text">标准差</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关系数"><span class="toc-number">4.</span> <span class="toc-text">相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-3"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自相关系数"><span class="toc-number">5.</span> <span class="toc-text">自相关系数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-4"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自相关图"><span class="toc-number">5.2.</span> <span class="toc-text">自相关图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#白噪声"><span class="toc-number">6.</span> <span class="toc-text">白噪声</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&text=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&is_video=false&description=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=协方差和相关系数&body=Check out this article: http://blog.tsinghua2018.top/2020/04/11/statistic-intro/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&title=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&name=协方差和相关系数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/11/statistic-intro/&t=协方差和相关系数" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&text=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&is_video=false&description=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=协方差 and 相关系数&body=Check out this article: http://blog.tsinghua2018.top/2020/04/11/statistic_intro/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&title=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&name=协方差 and 相关系数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/11/statistic_intro/&t=协方差 and 相关系数" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
