@@ -9,15 +9,16 @@
     <meta name="description" content="这篇 paper 由微软团队在 2016 年发表1。在这篇文章中，他们提出了结合了多种剪枝策略的封闭项挖掘算法，主要用于解决异常报告（emerging issues）的根因定位与根因分析等问题。 背景介绍 问题描述和挑战 多维度指标的异常定位是 AIOps 领域的一个典型且有挑战的问题。在互联网服务运维中，当某个总指标（如总流；量）发生异常时，需要快速准确地定位到是哪个交叉维度的细粒度指标（如“省">
 <meta property="og:type" content="article">
 <meta property="og:title" content="『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues">
-<meta property="og:url" content="http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/index.html">
+<meta property="og:url" content="http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/index.html">
 <meta property="og:site_name" content="David&#39;s Blog">
 <meta property="og:description" content="这篇 paper 由微软团队在 2016 年发表1。在这篇文章中，他们提出了结合了多种剪枝策略的封闭项挖掘算法，主要用于解决异常报告（emerging issues）的根因定位与根因分析等问题。 背景介绍 问题描述和挑战 多维度指标的异常定位是 AIOps 领域的一个典型且有挑战的问题。在互联网服务运维中，当某个总指标（如总流；量）发生异常时，需要快速准确地定位到是哪个交叉维度的细粒度指标（如“省">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_15-40-37.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_18-05-13.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/20200405164216.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-08_15-27-36.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-23_19-23-27.png">
 <meta property="article:published_time" content="2020-04-02T10:19:21.000Z">
-<meta property="article:modified_time" content="2020-04-21T05:56:23.189Z">
+<meta property="article:modified_time" content="2020-04-26T03:07:46.330Z">
 <meta property="article:author" content="David">
 <meta property="article:tag" content="AIOps">
 <meta property="article:tag" content="根因分析">
@@ -99,17 +100,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&text=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&is_video=false&description=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&name=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&t=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&text=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&is_video=false&description=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&name=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&t=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -231,11 +232,13 @@ p = \frac{V_{X_t}}{V_t}
 <p>对于基于 BFS 的封闭项目集挖掘过程返回的每个封闭项目集 <span class="math inline">\(p_i\)</span>，iDice 会依次执行基于影响程度的剪枝（第 6-10 行）、基于变化检测的剪枝（第 11-14 行）、基于隔离能力的剪枝（第 15-19 行）。这些步骤可以简化属性组合并减少搜索空间，从而有可能从大量属性组合中识别有效组合。第 21-26 行表示 iDice 的排名结果。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-08_15-27-36.png" style="zoom:40%;" /></p>
 <h3 id="评测结果">评测结果</h3>
-<p>评测结果就不在这里赘述了，毕竟每种数据集的各种参数都不相同，有兴趣的去看看原文。</p>
+<p>主要与 DPMiner<sup id="a4"><a href="#f4">4</a></sup> 进行了对比，iDice 在准确率上和效率上都优于 DPMiner。更详细的内容可以去阅读原文。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-23_19-23-27.png" style="zoom:40%;" /></p>
 <h2 id="reference">Reference</h2>
-<p><b id="f1">[1]:</b> Lin, Qingwei, et al. iDice: problem identification for emerging issues. <em>Proceedings of the 38th International Conference on Software Engineering</em>. 2016. <a href="#a1">↩︎</a></p>
-<p><b id="f2">[2]:</b> J. Han and M. Kamber. Data Mining: Concepts and Techniques. Morgan kaufmann, 2006. <a href="#a2">↩︎</a></p>
-<p><b id="f3">[3]:</b> M. Basseville, I. V. Nikiforov, et al. Detection of abrupt changes: theory and application, volume 104. Prentice Hall Englewood Cliﬀs, 1993. <a href="#a3">↩︎</a></p>
+<p><b id="f1">[1]:</b> Lin, Qingwei, et al. iDice: problem identification for emerging issues. <em>Proceedings of the 38th International Conference on Software Engineering</em>. 2016. <a href="#a1">↩</a></p>
+<p><b id="f2">[2]:</b> J. Han and M. Kamber. Data Mining: Concepts and Techniques. Morgan kaufmann, 2006. <a href="#a2">↩</a></p>
+<p><b id="f3">[3]:</b> M. Basseville, I. V. Nikiforov, et al. Detection of abrupt changes: theory and application, volume 104. Prentice Hall Englewood Cliﬀs, 1993. <a href="#a3">↩</a></p>
+<p><b id="f4">[4]:</b> J. Li, G. Liu, and L. Wong. Mining statistically important equivalence classes and delta-discriminative emerging patterns. In Proceedings of the 13th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 430–439, 2007. <a href="#a4">↩</a></p>
 <hr />
 
   </div>
@@ -273,17 +276,17 @@ p = \frac{V_{X_t}}{V_t}
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&text=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&is_video=false&description=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&name=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/02/idice_reading_report/&t=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&text=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&is_video=false&description=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&name=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&t=『阅读笔记』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
