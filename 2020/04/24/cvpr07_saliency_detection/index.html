@@ -25,7 +25,7 @@
         
     
     <!-- title -->
-    <title>『论文阅读』Saliency Detection - A Spectral Residual Approach</title>
+    <title>『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -93,14 +93,14 @@
     <div id="share" style="display: none">
       <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』Saliency Detection - A Spectral Residual Approach"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）"><i
                     class="fab fa-qq " aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』Saliency Detection - A Spectral Residual Approach"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）"><i
                     class="fab fa-weibo " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&text=『论文阅读』Saliency Detection - A Spectral Residual Approach" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&text=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）" target="_blank" rel="noopener"><i
                     class="fab fa-twitter " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『论文阅读』Saliency Detection - A Spectral Residual Approach&body=Check out this article: http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/"><i
+    <li><a class="icon" href="mailto:?subject=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）&body=Check out this article: http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/"><i
                     class="fas fa-envelope " aria-hidden="true"></i></a></li>
 </ul>
     </div>
@@ -116,7 +116,7 @@
     <header>
         
     <h1 class="posttitle" itemprop="name headline">
-        『论文阅读』Saliency Detection - A Spectral Residual Approach
+        『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）
     </h1>
 
         <div class="meta">
@@ -133,8 +133,8 @@
                   itemprop="datePublished">2020-04-24</time>
             
                 (Updated:
-                <time datetime="2020-05-11T11:46:37.904Z"
-                      itemprop="dateModified">2020-05-11</time>)
+                <time datetime="2020-05-12T11:42:54.495Z"
+                      itemprop="dateModified">2020-05-12</time>)
             
         
     </div>
@@ -150,7 +150,10 @@
     </header>
     
     <div class="content" itemprop="articleBody">
-        <p>这篇 paper 提出了一种简单的视觉显著性检测方法<sup id="a1"><a href="#f1">1</a></sup>。通过分析输入图像的对数频谱，提取图像在光谱域中的频谱残差，能够快速在空间域中构造对应的显著图。该方法可以用作图像中的物体检测。</p>
+        <blockquote>
+<p><em>Saliency Detection - A Spectral Residual Approach</em></p>
+</blockquote>
+<p>这篇 paper 提出了一种简单的视觉显著性检测方法<sup id="a1"><a href="#f1">1</a></sup>。通过分析输入图像的对数频谱，提取图像在光谱域中的频谱残差，能够快速在空间域中构造对应的显著图。该方法可以用作图像中的物体检测。</p>
 <h2 id="背景介绍">背景介绍</h2>
 <p>传统的模型通过将特定的特征与目标联系起来，实际上将物体检测的问题转化为特定种类的物体检测。由于这些模型是基于训练的，因此可扩展性成为通用性任务的瓶颈。面对视觉模式的不可预测性和众多类别，需要通用的显著性检测系统。换句话说，显著性检测器应该以最少的对象统计信息来实现。</p>
 <p>为了找到给定图像中的「原型对象」，基于 Treisman 的整合理论，Itti 和 Koch 提出了一个显著性模型来模拟人类的视觉搜索过程。Walther 在此基础上扩展了显著性模型，并将其成功地应用在对象识别任务上。但是，作为预处理系统，这些模型在计算上要求很高。</p>
@@ -242,14 +245,14 @@ h_{n}(f)=\frac{1}{n^{2}}\left(\begin{array}{cccc}
         <div id="share-footer" style="display: none">
             <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』Saliency Detection - A Spectral Residual Approach"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）"><i
                     class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』Saliency Detection - A Spectral Residual Approach"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&title=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）"><i
                     class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&text=『论文阅读』Saliency Detection - A Spectral Residual Approach" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/&text=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）" target="_blank" rel="noopener"><i
                     class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『论文阅读』Saliency Detection - A Spectral Residual Approach&body=Check out this article: http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/"><i
+    <li><a class="icon" href="mailto:?subject=『论文阅读』CVPR 2007 ── 视觉显著性检测算法：频谱残差（SR）&body=Check out this article: http://blog.tsinghua2018.top/2020/04/24/cvpr07_saliency_detection/"><i
                     class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
 </ul>
         </div>

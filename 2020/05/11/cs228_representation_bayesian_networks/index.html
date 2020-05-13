@@ -100,7 +100,7 @@
 </ul>
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bayesian-networks"><span class="toc-number">1.</span> <span class="toc-text">Bayesian Networks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的概率建模"><span class="toc-number">2.</span> <span class="toc-text">贝叶斯网络的概率建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图的表示"><span class="toc-number">2.1.</span> <span class="toc-text">图的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正式定义"><span class="toc-number">2.2.</span> <span class="toc-text">正式定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的依赖关系"><span class="toc-number">3.</span> <span class="toc-text">贝叶斯网络的依赖关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图描述的独立变量"><span class="toc-number">3.1.</span> <span class="toc-text">有向图描述的独立变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图的表示能力"><span class="toc-number">3.2.</span> <span class="toc-text">有向图的表示能力</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的概率建模"><span class="toc-number">1.</span> <span class="toc-text">贝叶斯网络的概率建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图的表示"><span class="toc-number">1.1.</span> <span class="toc-text">图的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正式定义"><span class="toc-number">1.2.</span> <span class="toc-text">正式定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的依赖关系"><span class="toc-number">2.</span> <span class="toc-text">贝叶斯网络的依赖关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图描述的独立变量"><span class="toc-number">2.1.</span> <span class="toc-text">有向图描述的独立变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图的表示能力"><span class="toc-number">2.2.</span> <span class="toc-text">有向图的表示能力</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -128,7 +128,7 @@
                   itemprop="datePublished">2020-05-11</time>
             
                 (Updated:
-                <time datetime="2020-05-12T09:56:35.600Z"
+                <time datetime="2020-05-12T12:02:40.000Z"
                       itemprop="dateModified">2020-05-12</time>)
             
         
@@ -145,8 +145,9 @@
     </header>
     
     <div class="content" itemprop="articleBody">
-        <p>以下内容翻译自 <a href="https://ermongroup.github.io/cs228-notes/" target="_blank" rel="noopener">CS228 课程</a>。</p>
-<h2 id="bayesian-networks">Bayesian Networks</h2>
+        <blockquote>
+<p>以下内容翻译自 <a href="https://ermongroup.github.io/cs228-notes/" target="_blank" rel="noopener">CS228 课程</a>。</p>
+</blockquote>
 <p>我们从 Representaion 的主题开始：我们如何选择概率分布来模拟世界中的某些有趣方面？提出一个好的模型并不总是那么容易：在引言中我们已经看到，一个简单的垃圾邮件分类模型将要求我们指定许多参数，这些参数的英文单词数量成倍增加。</p>
 <p>在本章中，我们将学习避免此类复杂的一种方法。我们准备：</p>
 <ul>
@@ -169,8 +170,8 @@ p\left(x_{i} | x_{i-1}, \ldots, x_{1}\right)=p\left(x_{i} | x_{A_{i}}\right)
 p(l, g, i, d, s)=p(l | g) p(g | i, d) p(i) p(d) p(s | i)
 \]</span> 该分布的图形表示形式是 DAG，它直观地表明了随机变量如何相互依赖：推荐信取决于分数，而分数又取决于学生的智力和考试难度。</p>
 <p><img src="https://ermongroup.github.io/cs228-notes/assets/img/grade-model.png" style="zoom:45%;" /></p>
-<center style="font-size:18px;color:#808080;text-decoration:underline">
-贝叶斯网络模型描述学生在考试中的表现。分布可以表示为特定表的条件概率分布的乘积。这些分布的形式由图中的边来描述。
+<center style="font-size:16px;color:#808080;text-decoration:underline">
+贝叶斯网络模型描述学生在考试中的表现，<br>分布可以表示为特定表的条件概率分布的乘积，<br>这些分布的形式由图中的边来描述。
 </center>
 <p>解释有向图的另一种方法是根据故事来说明如何生成数据。在上面的示例中，为了确定推荐信的质量，我们可以首先对智力水平和考试难度进行抽样；然后，根据这些参数对学生的成绩进行抽样；最后根据该成绩生成推荐信。</p>
 <p>在前面的垃圾邮件分类示例中，我们隐式地假定电子邮件是根据两步过程生成的：首先，我们选择垃圾邮件/非垃圾邮件的标签 <span class="math inline">\(y\)</span>，然后我们以该标签为条件，独立采样每个单词是否存在。</p>
@@ -216,9 +217,9 @@ p(l, g, i, d, s)=p(l | g) p(g | i, d) p(i) p(d) p(s | i)
 <h3 id="有向图的表示能力">有向图的表示能力</h3>
 <p>这就引出了我们最后一个，也许也是最重要的问题：有向图能否表达任何分布 <span class="math inline">\(p\)</span> 中的所有独立性？更正式地说，给定分布 <span class="math inline">\(p\)</span>，我们能否构造图 G 使得 <span class="math inline">\(I(G)=I(p)\)</span>？</p>
 <p>首先，构造一个图 G 满足 <span class="math inline">\(I(G) \subseteq I(p)\)</span> 是很容易的。一个全连接的有向图 G 是任何分布的 <span class="math inline">\(I\)</span>-map，因为 <span class="math inline">\(I(G)=\phi\)</span>。</p>
-<p><img src="https://ermongroup.github.io/cs228-notes/assets/img/full-bayesnet.png" style="zoom:67%;" /></p>
-<center style="font-size:18px;color:#808080;text-decoration:underline">
-A fully connected Bayesian network over four variables. There are no independencies in this model, and it is an I-map for any distribution
+<p><img src="https://ermongroup.github.io/cs228-notes/assets/img/full-bayesnet.png" style="zoom:50%;" /></p>
+<center style="font-size:16px;color:#808080;text-decoration:underline">
+A fully connected Bayesian network over four variables. <br>There are no independencies in this model,<br>and it is an I-map for any distribution
 </center>
 <p>一个更有趣的问题是，我们是否可以为 <span class="math inline">\(p\)</span> 找到一个最小的 <span class="math inline">\(I\)</span>-map，这样从 G 中删除任何一条边都将导致它不再是 <span class="math inline">\(I\)</span>-map。很容易的一个方法是：我们可以从完全连接的 G 开始，然后移除边，直到 G 不再是 <span class="math inline">\(I\)</span>-map。一种方法是遵循图的自然拓扑顺序，并删除节点祖先，直到不可删除为止。在进行结构学习时，我们将在课程结束时重新审视此修剪方法。</p>
 <p>但是，我们真正感兴趣的是，概率分布 <span class="math inline">\(p\)</span> 是否具有理想的映射 G 使得 <span class="math inline">\(I(p)=I(G)\)</span>。不幸的是，答案是否定的。例如，考虑以下关于三个变量 <span class="math inline">\(X, Y, Z\)</span> 的分布 <span class="math inline">\(p\)</span>，我们从伯努利分布中采样 <span class="math inline">\(X, Y \sim \operatorname{Ber}(0.5)\)</span>，并设 <span class="math inline">\(Z= X\; \text{xor}\; Y\)</span>（我们称之为 noizy-xor 示例）。我们可以使用代数 <span class="math inline">\(\{X \perp Y, Z \perp Y, X \perp Z\} \in I(p)\)</span> 以及 <span class="math inline">\(Z \perp\{Y, X\} \notin I(p)\)</span> 来检验。因此，尽管 <span class="math inline">\(X \to Z \gets Y\)</span> 是分布 <span class="math inline">\(p\)</span> 的 <span class="math inline">\(I\)</span>-map，但是我们讨论的 3-节点图结构都不能完美描述 <span class="math inline">\(I(p)\)</span>，因此该分布没有理想的映射。</p>
@@ -255,7 +256,7 @@ A fully connected Bayesian network over four variables. There are no independenc
         </div>
 
         <div id="toc-footer" style="display: none">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bayesian-networks"><span class="toc-number">1.</span> <span class="toc-text">Bayesian Networks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的概率建模"><span class="toc-number">2.</span> <span class="toc-text">贝叶斯网络的概率建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图的表示"><span class="toc-number">2.1.</span> <span class="toc-text">图的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正式定义"><span class="toc-number">2.2.</span> <span class="toc-text">正式定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的依赖关系"><span class="toc-number">3.</span> <span class="toc-text">贝叶斯网络的依赖关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图描述的独立变量"><span class="toc-number">3.1.</span> <span class="toc-text">有向图描述的独立变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图的表示能力"><span class="toc-number">3.2.</span> <span class="toc-text">有向图的表示能力</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的概率建模"><span class="toc-number">1.</span> <span class="toc-text">贝叶斯网络的概率建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图的表示"><span class="toc-number">1.1.</span> <span class="toc-text">图的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正式定义"><span class="toc-number">1.2.</span> <span class="toc-text">正式定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贝叶斯网络的依赖关系"><span class="toc-number">2.</span> <span class="toc-text">贝叶斯网络的依赖关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图描述的独立变量"><span class="toc-number">2.1.</span> <span class="toc-text">有向图描述的独立变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有向图的表示能力"><span class="toc-number">2.2.</span> <span class="toc-text">有向图的表示能力</span></a></li></ol></li></ol>
         </div>
 
         <div id="share-footer" style="display: none">

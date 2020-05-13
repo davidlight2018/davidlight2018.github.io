@@ -105,7 +105,7 @@
 </ul>
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#variable-elimination变量消除"><span class="toc-number">1.</span> <span class="toc-text">Variable Elimination（变量消除）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个例子"><span class="toc-number">1.1.</span> <span class="toc-text">一个例子</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一个例子"><span class="toc-number">1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eliminating-variables"><span class="toc-number">2.</span> <span class="toc-text">Eliminating Variables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#factors"><span class="toc-number">2.1.</span> <span class="toc-text">Factors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#factor-operations"><span class="toc-number">2.2.</span> <span class="toc-text">Factor Operations</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -133,7 +133,7 @@
                   itemprop="datePublished">2020-05-11</time>
             
                 (Updated:
-                <time datetime="2020-05-12T03:17:44.674Z"
+                <time datetime="2020-05-12T11:59:07.454Z"
                       itemprop="dateModified">2020-05-12</time>)
             
         
@@ -150,8 +150,9 @@
     </header>
     
     <div class="content" itemprop="articleBody">
-        <p>以下内容翻译自 <a href="https://ermongroup.github.io/cs228-notes/" target="_blank" rel="noopener">CS228 课程</a>。</p>
-<h2 id="variable-elimination变量消除">Variable Elimination（变量消除）</h2>
+        <blockquote>
+<p>以下内容翻译自 <a href="https://ermongroup.github.io/cs228-notes/" target="_blank" rel="noopener">CS228 课程</a>。</p>
+</blockquote>
 <p>接下来，我们将注意力转向图形模型中的推理问题。给定概率模型（例如贝叶斯网络或马尔可夫随机场, MRF），我们有兴趣使用它来回答有用的问题，例如确定一封电子邮件是垃圾邮件的可能性。更正式地说，我们关注两种类型的问题：</p>
 <ul>
 <li><p>Marginal inference（边际推论）：将所有其他因素相加后，模型中给定变量的概率是多少？（例如垃圾邮件与非垃圾邮件的概率） <span class="math display">\[
@@ -166,7 +167,7 @@ p(y=1)=\sum_{x_{1}} \sum_{x_{2}} \cdots \sum_{x_{n}} p\left(y=1, x_{1}, x_{2}, \
 <blockquote>
 <p>变量消除背后的原理也扩展到许多连续分布，例如高斯分布，但是我们在这里暂时不讨论这些扩展。</p>
 </blockquote>
-<h3 id="一个例子">一个例子</h3>
+<h2 id="一个例子">一个例子</h2>
 <p>首先考虑边际推理的问题。为简单起见，假设我们有一个链式贝叶斯网络，即形式为： <span class="math display">\[
 p\left(x_{1}, \ldots, x_{n}\right)=p\left(x_{1}\right) \prod_{i=2}^{n} p\left(x_{i} | x_{i-1}\right)
 \]</span> 我们对计算边际概率 <span class="math inline">\(p(x_n)\)</span> 感兴趣。最直观的计算方法是将所有 <span class="math inline">\(k^{n-1}\)</span> 个分配给 <span class="math inline">\(x_1, \dots, x_{n-1}\)</span> 的概率进行求和。 <span class="math display">\[
@@ -176,9 +177,21 @@ p\left(x_{n}\right)=\sum_{x_{1}} \cdots \sum_{x_{n-1}} p\left(x_{1}, \ldots, x_{
 p\left(x_{n}\right) &amp;=\sum_{x_{1}} \cdots \sum_{x_{n-1}} p\left(x_{1}\right) \prod_{i=2}^{n} p\left(x_{i} | x_{i-1}\right) \\
 &amp;=\sum_{x_{n-1}} p\left(x_{n} | x_{n-1}\right) \sum_{x_{n-2}} p\left(x_{n-1} | x_{n-2}\right) \cdots \sum_{x_{1}} p\left(x_{2} | x_{1}\right) p\left(x_{1}\right)
 \end{aligned}
-\]</span> 我们首先对内部项进行求和，从 <span class="math inline">\(x_1\)</span> 开始，以 <span class="math inline">\(x_{n-1}\)</span> 结尾。具体而言，我们通过求和 <span class="math inline">\(x_1\)</span> 来计算中间因子 <span class="math inline">\(\tau\left(x_{2}\right)=\sum_{x_{1}} p\left(x_{2} | x_{1}\right) p\left(x_{1}\right)\)</span>。这需要 <span class="math inline">\(O(k^2)\)</span> 的时间，因为每次对于 <span class="math inline">\(x_2\)</span> 的赋值，都必须求和 <span class="math inline">\(x_1\)</span>。可以将得到的因子 <span class="math inline">\(\tau\left(x_{2}\right)\)</span> 视为 <span class="math inline">\(k\)</span> 个值的一张表（尽管不一定是概率），每个对 <span class="math inline">\(x_2\)</span> 的赋值都有一个条目（就像因子 <span class="math inline">\(p(x_1)\)</span> 可以视为表格一样）。然后，我们可以使用 <span class="math inline">\(\tau\)</span> 重写边际概率： <span class="math display">\[
+\]</span> 我们首先对内部项进行求和，从 <span class="math inline">\(x_1\)</span> 开始，以 <span class="math inline">\(x_{n-1}\)</span> 结尾。具体而言，我们通过求和 <span class="math inline">\(x_1\)</span> 来计算中间因子 <span class="math inline">\(\tau\left(x_{2}\right)=\sum_{x_{1}} p\left(x_{2} | x_{1}\right) p\left(x_{1}\right)\)</span>。这需要 <span class="math inline">\(O(k^2)\)</span> 的时间，因为每次对于 <span class="math inline">\(x_2\)</span> 的赋值，都必须求和 <span class="math inline">\(x_1\)</span>。可以将得到的因子 <span class="math inline">\(\tau\left(x_{2}\right)\)</span> 视为具有 <span class="math inline">\(k\)</span> 个值的一张表（尽管不一定是概率），每个对 <span class="math inline">\(x_2\)</span> 的赋值都有一个条目（就像因子 <span class="math inline">\(p(x_1)\)</span> 可以视为表格一样）。然后，我们可以使用 <span class="math inline">\(\tau\)</span> 重写边际概率： <span class="math display">\[
 p\left(x_{n}\right)=\sum_{x_{n-1}} p\left(x_{n} | x_{n-1}\right) \sum_{x_{n-2}} p\left(x_{n-1} | x_{n-2}\right) \cdots \sum_{x_{2}} p\left(x_{3} | x_{2}\right) \tau\left(x_{2}\right)
-\]</span></p>
+\]</span> 这与初始表达式具有相同的形式，只是我们少对一个变量进行求和。我们可以接着计算另一个因子 <span class="math inline">\(\tau\left(x_{3}\right)=\sum_{x_{2}} p\left(x_{3} | x_{2}\right) p\left(x_{2}\right)\)</span>，之后重复该过程直到只剩下 <span class="math inline">\(x_n\)</span>。既然每一步都花费 <span class="math inline">\(O(k^2)\)</span> 的时间，一共执行了 <span class="math inline">\(O(n)\)</span> 步，即推断一共花费 <span class="math inline">\(O(nk^2)\)</span> 的时间，比朴素方法 <span class="math inline">\(O(k^n)\)</span> 要好的多了。</p>
+<p>我们在每一步中都消去（eliminating）了一个变量，也就是对应的算法名称。</p>
+<h2 id="eliminating-variables">Eliminating Variables</h2>
+<p>在使用特殊案例建立一些直观感受后，我们现在以一般形式介绍变量消除算法。</p>
+<h3 id="factors">Factors</h3>
+<p>假设我们给定一个图模型，由因子的乘积表示： <span class="math display">\[
+p\left(x_{1}, \ldots, x_{n}\right)=\prod_{c \in C} \phi_{c}\left(x_{c}\right)
+\]</span> 回想一下，我们可以将因子视为一张多维表，该多维表为变量 <span class="math inline">\(x_c\)</span> 的分布。在贝叶斯网络中，这些因素对应于条件概率分布；在马尔可夫随机场中，这些因子编码一个未归一化的分布。为了计算边际，我们首先计算函数的部分（也使用变量消除），然后使用未归一化的分布计算边际，最后将结果除以分区常数，以构造有效的边际概率。</p>
+<h3 id="factor-operations">Factor Operations</h3>
+<p>变量消除算法重复执行两个因子运算：乘积和边缘化。在链式的示例中，我们一直在隐事执行这些操作。</p>
+<p>因子乘法操作简单地定义 <span class="math inline">\(\phi_1, \phi_2\)</span> 的乘法操作 <span class="math inline">\(\phi_{3}:=\phi_{1} \times \phi_{2}\)</span> 为： <span class="math display">\[
+\phi_{3}\left(x_{c}\right)=\phi_{1}\left(x_{c}^{(1)}\right) \times \phi_{2}\left(x_{c}^{(2)}\right)
+\]</span> 其中 <span class="math inline">\(\phi_3\)</span> 的范围定义为 <span class="math inline">\(\phi_1, \phi_2\)</span> 范围内变量的并集。<span class="math inline">\(x_{c}^{(i)}\)</span> 表示在 <span class="math inline">\(\phi_i\)</span> 范围内变量的赋值，其中 <span class="math inline">\(\phi_i\)</span> 被 <span class="math inline">\(x_c\)</span> 所限制。例如，我们定义 <span class="math inline">\(\phi_3(a,b,c) := \phi_1(a,b) \times \phi_2(b,c)\)</span>。</p>
 
     </div>
 </article>
@@ -206,7 +219,7 @@ p\left(x_{n}\right)=\sum_{x_{n-1}} p\left(x_{n} | x_{n-1}\right) \sum_{x_{n-2}} 
         </div>
 
         <div id="toc-footer" style="display: none">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#variable-elimination变量消除"><span class="toc-number">1.</span> <span class="toc-text">Variable Elimination（变量消除）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个例子"><span class="toc-number">1.1.</span> <span class="toc-text">一个例子</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一个例子"><span class="toc-number">1.</span> <span class="toc-text">一个例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eliminating-variables"><span class="toc-number">2.</span> <span class="toc-text">Eliminating Variables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#factors"><span class="toc-number">2.1.</span> <span class="toc-text">Factors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#factor-operations"><span class="toc-number">2.2.</span> <span class="toc-text">Factor Operations</span></a></li></ol></li></ol>
         </div>
 
         <div id="share-footer" style="display: none">

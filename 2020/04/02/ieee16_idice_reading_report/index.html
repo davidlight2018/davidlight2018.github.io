@@ -25,7 +25,7 @@
         
     
     <!-- title -->
-    <title>『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues</title>
+    <title>『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -88,14 +88,14 @@
     <div id="share" style="display: none">
       <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）"><i
                     class="fab fa-qq " aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）"><i
                     class="fab fa-weibo " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&text=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&text=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）" target="_blank" rel="noopener"><i
                     class="fab fa-twitter " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/"><i
+    <li><a class="icon" href="mailto:?subject=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/"><i
                     class="fas fa-envelope " aria-hidden="true"></i></a></li>
 </ul>
     </div>
@@ -111,7 +111,7 @@
     <header>
         
     <h1 class="posttitle" itemprop="name headline">
-        『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues
+        『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）
     </h1>
 
         <div class="meta">
@@ -128,8 +128,8 @@
                   itemprop="datePublished">2020-04-02</time>
             
                 (Updated:
-                <time datetime="2020-05-11T11:46:31.479Z"
-                      itemprop="dateModified">2020-05-11</time>)
+                <time datetime="2020-05-13T02:17:17.430Z"
+                      itemprop="dateModified">2020-05-13</time>)
             
         
     </div>
@@ -145,14 +145,19 @@
     </header>
     
     <div class="content" itemprop="articleBody">
-        <p>这篇 paper 由微软团队在 2016 年发表<sup id="a1"><a href="#f1">1</a></sup>。在这篇文章中，他们提出了结合了多种剪枝策略的封闭项挖掘算法，主要用于解决异常报告（emerging issues）的根因定位与根因分析等问题。</p>
+        <blockquote>
+<p><em>iDice - Problem Identiﬁcation for Emerging Issues</em></p>
+</blockquote>
+<p>这篇 paper 由微软团队在 2016 年发表<sup id="a1"><a href="#f1">1</a></sup>。在这篇文章中，他们提出了结合了多种剪枝策略的封闭项挖掘算法，主要用于解决异常报告（emerging issues）的根因定位与根因分析等问题。</p>
 <h2 id="背景介绍">背景介绍</h2>
 <h3 id="问题描述和挑战">问题描述和挑战</h3>
 <p>多维度指标的异常定位是 AIOps 领域的一个典型且有挑战的问题。在互联网服务运维中，当某个总指标（如总流；量）发生异常时，需要快速准确地定位到是哪个交叉维度的细粒度指标（如“省份=北京 &amp; 运营商=联通”的流量）的异常导致的，以便尽快做进一步的修复止损动作。由于运维中的指标维度多、每个维度的取值范围大，导致异常定位的搜索空间非常大。同时，由于这些属性通常都包括时间戳，因此诸如“挖掘频繁子集”的方法在此场景下就不太适用。</p>
 <h3 id="有效组合">有效组合</h3>
 <p>我们将出现问题的属性组合称为有效组合（effective combinations），因此面临的挑战是从所有可能的组合中自动且精准地识别出有效组合。整个属性组合通过子集-超集的关系形成一种格结构。每个节点表示一个属性组合，每条边表示一个子集-超集关系。</p>
-<p>对于 X 和 Y 的两个属性组合，如果包含 X 的数据也包含在 Y 的数据中，则称 X 为 Y 的子集，Y 为 X 的超集。例如，{A, B, C} 是 {A, B} 和 {A, C} 的子集。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_15-40-37.png" style="zoom: 50%;" /></p>
+对于 X 和 Y 的两个属性组合，如果包含 X 的数据也包含在 Y 的数据中，则称 X 为 Y 的子集，Y 为 X 的超集。例如，{A, B, C} 是 {A, B} 和 {A, C} 的子集。
+<center>
+<img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-03_15-40-37.png" style="zoom: 50%;"/>
+</center>
 <center style="font-size:14px;color:#808080;text-decoration:underline">
 图1. 有效组合
 </center>
@@ -259,14 +264,14 @@ p = \frac{V_{X_t}}{V_t}
         <div id="share-footer" style="display: none">
             <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）"><i
                     class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&title=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）"><i
                     class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&text=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/&text=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）" target="_blank" rel="noopener"><i
                     class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『论文阅读』iDice - Problem Identiﬁcation for Emerging Issues&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/"><i
+    <li><a class="icon" href="mailto:?subject=『论文阅读』IEEE 2016 ── 异常报告的根因定位挖掘算法：iDice（微软）&body=Check out this article: http://blog.tsinghua2018.top/2020/04/02/ieee16_idice_reading_report/"><i
                     class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
 </ul>
         </div>

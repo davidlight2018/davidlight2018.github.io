@@ -25,7 +25,7 @@
         
     
     <!-- title -->
-    <title>『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data</title>
+    <title>『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -93,14 +93,14 @@
     <div id="share" style="display: none">
       <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED"><i
                     class="fab fa-qq " aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED"><i
                     class="fab fa-weibo " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&text=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&text=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED" target="_blank" rel="noopener"><i
                     class="fab fa-twitter " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data&body=Check out this article: http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/"><i
+    <li><a class="icon" href="mailto:?subject=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED&body=Check out this article: http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/"><i
                     class="fas fa-envelope " aria-hidden="true"></i></a></li>
 </ul>
     </div>
@@ -116,7 +116,7 @@
     <header>
         
     <h1 class="posttitle" itemprop="name headline">
-        『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data
+        『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED
     </h1>
 
         <div class="meta">
@@ -133,8 +133,8 @@
                   itemprop="datePublished">2020-04-22</time>
             
                 (Updated:
-                <time datetime="2020-05-11T11:46:44.071Z"
-                      itemprop="dateModified">2020-05-11</time>)
+                <time datetime="2020-05-12T11:50:40.000Z"
+                      itemprop="dateModified">2020-05-12</time>)
             
         
     </div>
@@ -150,7 +150,10 @@
     </header>
     
     <div class="content" itemprop="articleBody">
-        <p>这篇 paper 提出了一种多尺度卷积递归编码-解码器（Multi-Scale Convolutional Recurrent Encoder-Decoder, MSCRED），可以对多元时间序列数据进行异常检测和诊断。具体来说，MSCRED 首先构建多尺度（分辨率）的签名矩阵，来刻画不同时间步长中系统状态的多个级别。之后，在给定签名矩阵的情况下，使用卷积编码器对传感器（时间序列）之间的相关性进行编码，并开发了基于注意力的卷积 LSTM（ConvLSTM）网络来捕获其中的时间模式。最后，基于对传感器间的相关性和时间信息进行编码从而得到的特征图，使用卷积解码器重建输入签名矩阵，并进一步用残差签名矩阵进行异常检测和诊断。</p>
+        <blockquote>
+<p><em>A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data</em></p>
+</blockquote>
+<p>这篇 paper 提出了一种多尺度卷积循环的编码-解码器（Multi-Scale Convolutional Recurrent Encoder-Decoder, MSCRED），可以对多元时间序列数据进行异常检测和诊断。具体来说，MSCRED 首先构建多尺度（分辨率）的签名矩阵，来刻画不同时间步长中系统状态的多个级别。之后，在给定签名矩阵的情况下，使用卷积编码器对传感器（时间序列）之间的相关性进行编码，并开发了基于注意力的卷积 LSTM（ConvLSTM）网络来捕获其中的时间模式。最后，基于对传感器间的相关性和时间信息进行编码从而得到的特征图，使用卷积解码器重建输入签名矩阵，并进一步用残差签名矩阵进行异常检测和诊断。</p>
 <h2 id="背景介绍">背景介绍</h2>
 <p>主要目的是对多元的时间序列数据进行异常检测。图 1 展示了多元时间序列中的两个异常点 <span class="math inline">\(A_1\)</span> 和 <span class="math inline">\(A_2\)</span>，其根本原因分别是黄色和黑色时间序列的异常，<span class="math inline">\(A_2\)</span> 的持续时间大于 <span class="math inline">\(A_1\)</span>，也可以说明 <span class="math inline">\(A_2\)</span> 的严重性级别大于 <span class="math inline">\(A_1\)</span>。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/davidlight2018/figure_bed/img/2020-04-25_16-02-30.png" style="zoom:40%;" /></p>
@@ -256,14 +259,14 @@ m_{i j}^{t}=\frac{\sum_{\delta=0}^{w} x_{i}^{t-\delta} x_{j}^{t-\delta}}{\kappa}
         <div id="share-footer" style="display: none">
             <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED"><i
                     class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&title=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED"><i
                     class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&text=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/&text=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED" target="_blank" rel="noopener"><i
                     class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『论文阅读』A Deep Neural Network for Unsupervised Anomaly Detection and Diagnosis in Multivariate Time Series Data&body=Check out this article: http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/"><i
+    <li><a class="icon" href="mailto:?subject=『论文阅读』AAAI 2019 ── 多元时间序列的异常检测算法：MSCRED&body=Check out this article: http://blog.tsinghua2018.top/2020/04/22/aaai19_unsupervised_reading_report/"><i
                     class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
 </ul>
         </div>
