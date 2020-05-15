@@ -25,7 +25,7 @@
         
     
     <!-- title -->
-    <title>『CS228笔记』Representaion ── Bayesian Networks</title>
+    <title>『CS228笔记』Representaion ── Bayesian Networks（一）</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -66,6 +66,11 @@
     <span id="actions">
       <ul>
           
+              <li><a class="icon" href="/2020/05/15/cs228_inference_sampling_based/"><i class="fas fa-chevron-left"
+                                                                           aria-hidden="true"
+                                                                           onmouseover="$('#i-prev').toggle();"
+                                                                           onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
           
               <li><a class="icon" href="/2020/05/11/cs228_inference_variable_elimination/"><i class="fas fa-chevron-right"
                                                                            aria-hidden="true"
@@ -88,14 +93,14 @@
     <div id="share" style="display: none">
       <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks（一）"><i
                     class="fab fa-qq " aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks（一）"><i
                     class="fab fa-weibo " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&text=『CS228笔记』Representaion ── Bayesian Networks" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&text=『CS228笔记』Representaion ── Bayesian Networks（一）" target="_blank" rel="noopener"><i
                     class="fab fa-twitter " aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『CS228笔记』Representaion ── Bayesian Networks&body=Check out this article: http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/"><i
+    <li><a class="icon" href="mailto:?subject=『CS228笔记』Representaion ── Bayesian Networks（一）&body=Check out this article: http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/"><i
                     class="fas fa-envelope " aria-hidden="true"></i></a></li>
 </ul>
     </div>
@@ -111,7 +116,7 @@
     <header>
         
     <h1 class="posttitle" itemprop="name headline">
-        『CS228笔记』Representaion ── Bayesian Networks
+        『CS228笔记』Representaion ── Bayesian Networks（一）
     </h1>
 
         <div class="meta">
@@ -127,17 +132,13 @@
             <time datetime="2020-05-11T11:44:41.000Z"
                   itemprop="datePublished">2020-05-11</time>
             
-                (Updated:
-                <time datetime="2020-05-12T12:02:40.000Z"
-                      itemprop="dateModified">2020-05-12</time>)
-            
         
     </div>
 
             
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/CS228-%E7%AC%94%E8%AE%B0/">CS228 笔记</a>
+        <a class="category-link" href="/categories/CS228%E7%AC%94%E8%AE%B0/">CS228笔记</a>
     </div>
 
             
@@ -193,7 +194,7 @@ p(l, g, i, d, s)=p(l | g) p(g | i, d) p(i) p(d) p(s | i)
 <p><img src="https://ermongroup.github.io/cs228-notes/assets/img/3node-bayesnets.png" style="zoom:70%;" /></p>
 <ul>
 <li>Cascade（级联）：如果 G 的结构为 <span class="math inline">\(X \to Z \to Y\)</span>，如图 (a) 和 (b)。若 <span class="math inline">\(Z\)</span> 是可以被观察到的，则 <span class="math inline">\(X \perp Y\;|\;Z\)</span>；但是若 <span class="math inline">\(Z\)</span> 是不可观察到的，则 <span class="math inline">\(X \not\perp Y\)</span>。这里，直觉上来说，<span class="math inline">\(Z\)</span> 掌握着所有决定 <span class="math inline">\(Y\)</span> 输出的所有信息，因此 <span class="math inline">\(X\)</span> 的取值并不重要。</li>
-<li>Common parent（共同父节点）：若 G 的结构为 <span class="math inline">\(X \gets Z \to Y\)</span>，如图 (c)。若 <span class="math inline">\(Z\)</span> 是可以被观察到的，则 <span class="math inline">\(X \perp Y\;|\;Z\)</span>；若 <span class="math inline">\(Z\)</span> 是不可观察到的，则 <span class="math inline">\(X \not\perp Y\)</span>。从直觉上将，这是因为 <span class="math inline">\(Z\)</span> 包含了决定 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 结果的所有信息，一旦观察到，没有其他因素会影响这些变量的结果。</li>
+<li>Common parent（共同父节点）：若 G 的结构为 <span class="math inline">\(X \gets Z \to Y\)</span>，如图 (c)。若 <span class="math inline">\(Z\)</span> 是可以被观察到的，则 <span class="math inline">\(X \perp Y\;|\;Z\)</span>；若 <span class="math inline">\(Z\)</span> 是不可观察到的，则 <span class="math inline">\(X \not\perp Y\)</span>。从直觉上讲，这是因为 <span class="math inline">\(Z\)</span> 包含了决定 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 结果的所有信息，一旦观察到，没有其他因素会影响这些变量的结果。</li>
 <li><span class="math inline">\(V\)</span>-structure（又被称为 explaining away）：若 G 的结构为 <span class="math inline">\(X \to Z \gets Y\)</span>，如图 (d) 所示。那么已知的 <span class="math inline">\(Z\)</span> 关联着 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span>。换句话说，若 <span class="math inline">\(Z\)</span> 是不可观察的，则<span class="math inline">\(X \perp Y\)</span>，但是若 <span class="math inline">\(Z\)</span> 是可观察的，那么 <span class="math inline">\(X \not\perp Y\;|\;Z\)</span>。</li>
 </ul>
 <p>最后一种情况需要进一步说明。假设 <span class="math inline">\(Z\)</span> 是一个布尔变量，它表示我们的草坪在早晨是否潮湿。<span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 是潮湿的两种解释：要么下雨了（由 <span class="math inline">\(X\)</span> 表示），要么是洒水喷头打开了（由 <span class="math inline">\(Y\)</span> 表示）。如果我们知道草坪是湿的（<span class="math inline">\(Z\)</span> 为真），并且洒水喷头没有运转（<span class="math inline">\(Y\)</span> 为假），则 <span class="math inline">\(X\)</span> 为真的概率必须为 1，因为这是唯一可能的解释。因此，给定 <span class="math inline">\(Z\)</span>，<span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 不是独立的。</p>
@@ -262,14 +263,14 @@ A fully connected Bayesian network over four variables. <br>There are no indepen
         <div id="share-footer" style="display: none">
             <ul>
     <li><a class="icon"
-           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks"><i
+           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks（一）"><i
                     class="fab fa-qq fa-lg" aria-hidden="true"></i></a></li>
     <li><a class="icon"
-           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks"><i
+           href="https://service.weibo.com/share/share.php?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&title=『CS228笔记』Representaion ── Bayesian Networks（一）"><i
                     class="fab fa-weibo fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&text=『CS228笔记』Representaion ── Bayesian Networks" target="_blank" rel="noopener"><i
+    <li><a class="icon" href="https://twitter.com/share?url=http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/&text=『CS228笔记』Representaion ── Bayesian Networks（一）" target="_blank" rel="noopener"><i
                     class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-    <li><a class="icon" href="mailto:?subject=『CS228笔记』Representaion ── Bayesian Networks&body=Check out this article: http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/"><i
+    <li><a class="icon" href="mailto:?subject=『CS228笔记』Representaion ── Bayesian Networks（一）&body=Check out this article: http://blog.tsinghua2018.top/2020/05/11/cs228_representation_bayesian_networks/"><i
                     class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
 </ul>
         </div>
